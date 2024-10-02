@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -22,11 +24,65 @@ public class CruddemoApplication {
 //			createStudent(studentDAO);
 
 			//create multiple student
-//			createMultipleStudent(studentDAO);
+			createMultipleStudent(studentDAO);
 
 			//find by id
-			readStudent(studentDAO);
+//			readStudent(studentDAO);
+
+			//getAll
+//			queryForStudents(studentDAO);
+
+//			queryForStudentsByLastName(studentDAO);
+			
+//			updateStudent(studentDAO);
+
+//			deleteStudent(studentDAO);
+
+//			deleteAllStudent(studentDAO);
 		};
+	}
+
+	private void deleteAllStudent(StudentDAO studentDAO) {
+		System.out.println("Deleting all students.........");
+		int numRowsDeleted = studentDAO.deleteAll();
+		System.out.println("Rows Deleted: "+ numRowsDeleted);
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		System.out.println("Deleting student.....");
+		studentDAO.delete(7);
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		System.out.println("getting student.......");
+		Student theStudent = studentDAO.findById(5);
+
+		System.out.println("Update student");
+		theStudent.setFirstName("john");
+
+		studentDAO.update(theStudent);
+
+		System.out.println("Updated: "+ theStudent);
+	}
+
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+		// get list of students
+		List<Student> theStudent = studentDAO.findByLastName("Do");
+
+		// display list
+		for(Student std: theStudent){
+			System.out.println(std);
+		}
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		//get list
+		List<Student> theStudents = studentDAO.findAll();
+
+		// display
+		for(Student tempStudent: theStudents){
+			System.out.println(tempStudent);
+		}
 	}
 
 	private void readStudent(StudentDAO studentDAO) {
@@ -60,9 +116,9 @@ public class CruddemoApplication {
 		// save the object
 		System.out.println("Saving the student.....");
 
-//		studentDAO.save(tempStudent1);
-//		studentDAO.save(tempStudent2);
-//		studentDAO.save(tempStudent3);
+		studentDAO.save(tempStudent1);
+		studentDAO.save(tempStudent2);
+		studentDAO.save(tempStudent3);
 
 
 	}
