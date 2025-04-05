@@ -11,7 +11,7 @@ public class DemoController {
     private Coach myCoach;
 //    private Coach anotherCoach;
 
-    // constructor injection
+    // ---------------- constructor injection
     @Autowired
     public DemoController(@Qualifier("aquatic") Coach coachName
 //                          @Qualifier("cricketCoach") Coach anotherCoachName
@@ -24,7 +24,7 @@ public class DemoController {
 //        myCoach = coachName;
 //    }
 
-    // setter injection
+    // -------- setter injection
 //    @Autowired
 //    public void setMyCoach(Coach theCoach) {
 //        myCoach = theCoach;
