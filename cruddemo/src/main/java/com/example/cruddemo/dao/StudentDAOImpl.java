@@ -4,6 +4,7 @@ import com.example.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class StudentDAOImpl implements StudentDAO{
     private EntityManager entityManager;
 
     // inject entity manager using constructor injection
-
+    @Autowired
     public StudentDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -34,7 +35,7 @@ public class StudentDAOImpl implements StudentDAO{
     @Override
     public List<Student> findAll() {
         // create query
-        TypedQuery<Student> theQuery = entityManager.createQuery("From Student", Student.class);
+        TypedQuery<Student> theQuery = entityManager.createQuery("From Student order by lastName asc", Student.class);
 
         //return query result
         return theQuery.getResultList();
